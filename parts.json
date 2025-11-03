@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Spur Gear",
+    "category": "gear",
+    "about": "Toothed wheel with straight teeth on a parallel shaft. Transmits motion between parallel axes.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Gears_%28Spur%29.jpg/640px-Gears_%28Spur%29.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/GearboxAssy/glTF-Binary/GearboxAssy.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Helical Gear",
+    "category": "gear",
+    "about": "Angled teeth for smoother, quieter operation than spur gears.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Helical_gear.png/640px-Helical_gear.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/GearboxAssy/glTF-Binary/GearboxAssy.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Bevel Gear",
+    "category": "gear",
+    "about": "Conical gears for intersecting shafts, often at 90°.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Bevel_gear.png/640px-Bevel_gear.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/GearboxAssy/glTF-Binary/GearboxAssy.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Worm Gear",
+    "category": "gear",
+    "about": "Screw-like worm drives a worm wheel. High reduction, self-locking.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Worm_gear.jpg/640px-Worm_gear.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/GearboxAssy/glTF-Binary/GearboxAssy.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Hex Bolt",
+    "category": "fastener",
+    "about": "External hex head. Used with a nut or tapped hole.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Hex_bolt.png/640px-Hex_bolt.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Hex Nut",
+    "category": "fastener",
+    "about": "Mates with a bolt to clamp parts together.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Hex_nut.svg/640px-Hex_nut.svg.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Flat Washer",
+    "category": "fastener",
+    "about": "Spreads load under a bolt head or nut. Protects surfaces.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Washers_%28hardware%29.jpg/640px-Washers_%28hardware%29.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF-Binary/Box.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Spring Lock Washer",
+    "category": "fastener",
+    "about": "Split ring that resists loosening from vibration.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Lock_washer.jpg/640px-Lock_washer.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF-Binary/Box.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Wood Screw",
+    "category": "fastener",
+    "about": "Tapered shaft, coarse threads for wood.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Wood_screw.png/640px-Wood_screw.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoomBox/glTF-Binary/BoomBox.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Machine Screw",
+    "category": "fastener",
+    "about": "Uniform diameter, used with tapped holes and nuts.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Screw_Head_Types.svg/640px-Screw_Head_Types.svg.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoomBox/glTF-Binary/BoomBox.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Dowel Pin",
+    "category": "locating",
+    "about": "Cylindrical pin used to precisely locate or align parts.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Dowel_pins.jpg/640px-Dowel_pins.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF-Binary/CesiumMan.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Taper Pin",
+    "category": "locating",
+    "about": "Slightly tapered pin for secure positioning under shear.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Taper_pin.png/640px-Taper_pin.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF-Binary/CesiumMan.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Key & Keyway",
+    "category": "power",
+    "about": "Square key prevents relative rotation between shaft and hub.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Key_and_keyway.svg/640px-Key_and_keyway.svg.png",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/GearboxAssy/glTF-Binary/GearboxAssy.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Shaft",
+    "category": "power",
+    "about": "Rotating element transmitting torque and motion.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Transmission_shaft.jpg/640px-Transmission_shaft.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/GearboxAssy/glTF-Binary/GearboxAssy.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Ball Bearing",
+    "category": "bearing",
+    "about": "Rolling-element bearing reducing friction between rotating parts.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ball_bearing.jpg/640px-Ball_bearing.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/AntiqueCamera/glTF-Binary/AntiqueCamera.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Pulley",
+    "category": "power",
+    "about": "Wheel with a grooved rim for belt or rope transmission.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Fixed_pulley.jpg/640px-Fixed_pulley.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF-Binary/CesiumMan.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Sprocket",
+    "category": "power",
+    "about": "Toothed wheel that meshes with a chain.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sprocket.jpg/640px-Sprocket.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF-Binary/CesiumMan.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Roller Chain",
+    "category": "power",
+    "about": "Series of short cylindrical rollers held together by side links.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Roller_chain.jpg/640px-Roller_chain.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF-Binary/CesiumMan.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "Compression Spring",
+    "category": "spring",
+    "about": "Open-coil helical spring offering resistance to compressive force.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Compression_springs.jpg/640px-Compression_springs.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Fox/glTF-Binary/Fox.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  },
+  {
+    "name": "O-Ring",
+    "category": "seal",
+    "about": "Elastomer ring used as a mechanical seal or gasket.",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/O-Rings.jpg/640px-O-Rings.jpg",
+    "glb": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF-Binary/Box.glb",
+    "source": "Wikimedia Commons; glTF Sample Models"
+  }
+]
