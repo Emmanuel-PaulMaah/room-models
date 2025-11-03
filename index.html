@@ -3,42 +3,46 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Machine Parts: 3D + AR</title>
+  <title>Machine Parts Browser</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
   <style>
-    :root { --gap:12px; --card-w:200px; --ink:#e6e6e6; --bg:#0a0c0f; --panel:#0f1217; --line:#1a1f27; --accent:#9dc1ff;}
-    * { box-sizing:border-box; }
-    body { margin:0; font:14px/1.45 system-ui, -apple-system, Segoe UI, Roboto; color:var(--ink); background:var(--bg); }
-    header { padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:12px; }
-    header h1 { margin:0; font-size:16px; font-weight:700; letter-spacing:.4px; }
-    main { display:grid; grid-template-columns: 320px 1fr; min-height:calc(100vh - 52px); }
-    #sidebar { border-right:1px solid var(--line); padding:12px; background:linear-gradient(180deg, #0c1117 0, #0a0c0f 100%); }
-    #grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(var(--card-w), 1fr)); gap:var(--gap); }
-    .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; cursor:pointer; transition:transform .06s ease; }
-    .card:active { transform:translateY(1px); }
-    .thumb { width:100%; height:150px; display:block; object-fit:cover; background:#10141b; }
-    .meta { padding:8px; display:flex; justify-content:space-between; align-items:center; gap:6px; }
-    .name { font-weight:600; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .pill { font-size:11px; padding:1px 6px; border:1px solid var(--line); border-radius:999px; opacity:.8; }
-    #viewerPane { padding:16px; display:flex; flex-direction:column; gap:12px; }
-    #viewer { width:100%; height:min(70vh, 560px); background:#0d0f14; border:1px solid var(--line); border-radius:12px; }
-    #viewer[reveal="interaction"]::part(default-progress-bar) { display:none; }
-    .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-    a { color:var(--accent); text-decoration:none; }
-    button { padding:8px 12px; background:#151a22; border:1px solid var(--line); color:var(--ink); border-radius:8px; cursor:pointer; }
-    button[disabled]{ opacity:.5; cursor:not-allowed; }
-    .hint { opacity:.7; font-size:12px; }
-    @media (max-width: 900px) { main { grid-template-columns: 1fr; } #sidebar { order:2 } #viewerPane { order:1 } }
+    :root { --ink:#e6e6e6; --bg:#0a0c0f; --panel:#0f1217; --line:#1a1f27; --accent:#9dc1ff; --gap:12px; }
+    *{ box-sizing:border-box }
+    body{ margin:0; font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink); background:var(--bg) }
+    header{ padding:14px 16px; border-bottom:1px solid var(--line) }
+    header h1{ margin:0; font-size:16px }
+    main{ display:grid; grid-template-rows:auto auto 1fr; gap:var(--gap); padding:12px }
+    /* Main box */
+    #mainBox{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; }
+    #viewer{ width:100%; height:min(60vh,560px); background:#0d0f14; border:1px solid var(--line); border-radius:10px; }
+    .details{ display:grid; grid-template-columns: 64px 1fr; gap:12px; align-items:center; padding-top:10px }
+    .thumb{ width:64px; height:64px; object-fit:cover; border-radius:6px; background:#10141b; border:1px solid var(--line) }
+    .titleRow{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+    .name{ font-weight:700 }
+    .tag{ font-size:11px; padding:2px 8px; border:1px solid var(--line); border-radius:999px; opacity:.9 }
+    .about{ opacity:.8; font-size:13px; margin-top:4px }
+    /* Carousel */
+    #carouselWrap{ overflow-x:auto; overscroll-behavior-x:contain; padding-bottom:6px }
+    #carousel{ display:flex; gap:10px; min-height:140px }
+    .card{ width:150px; flex:0 0 auto; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; cursor:pointer; }
+    .card:active{ transform:translateY(1px) }
+    .card img{ width:100%; height:100px; object-fit:cover; display:block; background:#10141b }
+    .card .meta{ padding:6px 8px; display:flex; justify-content:space-between; gap:6px; align-items:center }
+    .card .name{ font-size:12px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+    .card .tag{ font-size:10px }
+    .active{ outline:2px solid var(--accent) }
+    .hint{ opacity:.7; font-size:12px; padding:0 2px }
+    button{ padding:8px 12px; background:#151a22; border:1px solid var(--line); color:var(--ink); border-radius:8px; cursor:pointer }
+    button[disabled]{ opacity:.5; cursor:not-allowed }
   </style>
 </head>
 <body>
   <header><h1>Machine Parts</h1></header>
 
   <main>
-    <aside id="sidebar"><div id="grid"></div></aside>
-
-    <section id="viewerPane">
+    <!-- MAIN BOX -->
+    <section id="mainBox">
       <model-viewer id="viewer"
         ar
         ar-modes="scene-viewer"
@@ -46,86 +50,114 @@
         shadow-intensity="1"
         exposure="1"
         environment-image="neutral"
-        poster=""
         reveal="interaction"
         autoplay>
-        <button slot="ar-button" id="arButton">View in your space</button>
-        <div slot="poster" class="hint" style="padding:12px;">Tap to load preview</div>
+        <button slot="ar-button" id="arBtn">View in your space</button>
+        <div slot="poster" class="hint" style="padding:12px;">Tap to load 3D</div>
         <div class="hint" slot="progress-bar">Loading…</div>
       </model-viewer>
 
-      <div class="row">
-        <div id="title" style="font-weight:700;"></div>
-        <span class="pill" id="cat"></span>
-        <a id="srcLink" target="_blank" rel="noreferrer">model</a>
+      <div class="details">
+        <img id="thumb" class="thumb" alt="">
+        <div>
+          <div class="titleRow">
+            <div id="title" class="name"></div>
+            <span id="category" class="tag"></span>
+          </div>
+          <div id="about" class="about"></div>
+        </div>
       </div>
-      <div class="hint" id="about"></div>
-      <div class="hint">AR uses Google Scene Viewer on Android Chrome. Desktop/iOS shows 3D only.</div>
+      <div class="hint">Tip: explore the 3D view, then tap “View in your space” on supported Android Chrome.</div>
+    </section>
+
+    <!-- CAROUSEL -->
+    <section>
+      <div class="hint">Browse parts</div>
+      <div id="carouselWrap">
+        <div id="carousel"></div>
+      </div>
     </section>
   </main>
 
   <script>
-    const grid = document.getElementById('grid');
-    const viewer = document.getElementById('viewer');
-    const titleEl = document.getElementById('title');
-    const catEl = document.getElementById('cat');
-    const aboutEl = document.getElementById('about');
-    const srcLink = document.getElementById('srcLink');
-    const arButton = document.getElementById('arButton');
+    const viewer   = document.getElementById('viewer');
+    const arBtn    = document.getElementById('arBtn');
+    const titleEl  = document.getElementById('title');
+    const catEl    = document.getElementById('category');
+    const aboutEl  = document.getElementById('about');
+    const thumbEl  = document.getElementById('thumb');
+    const carousel = document.getElementById('carousel');
 
+    // Gate AR button to Android Chrome with ARCore/Play Services for AR
     const sceneViewerSupported = /Android/i.test(navigator.userAgent) && /Chrome/i.test(navigator.userAgent);
-    if (!sceneViewerSupported) { arButton.setAttribute('disabled','true'); arButton.textContent = 'AR requires Android Chrome'; }
+    if (!sceneViewerSupported) {
+      arBtn.setAttribute('disabled','true');
+      arBtn.textContent = 'AR requires Android Chrome';
+    }
 
     let CATALOG = [];
+    let activeIdx = 0;
 
-    function selectModel(m) {
+    function renderCarousel() {
+      carousel.innerHTML = '';
+      CATALOG.forEach((m, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card' + (idx === activeIdx ? ' active' : '');
+        card.addEventListener('click', () => selectIdx(idx));
+
+        const img = document.createElement('img');
+        img.src = m.thumb;
+        img.alt = m.name;
+        img.loading = 'lazy';
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+
+        const nm = document.createElement('div');
+        nm.className = 'name';
+        nm.textContent = m.name;
+
+        const tg = document.createElement('span');
+        tg.className = 'tag';
+        tg.textContent = m.category || 'part';
+
+        meta.appendChild(nm);
+        meta.appendChild(tg);
+        card.appendChild(img);
+        card.appendChild(meta);
+        carousel.appendChild(card);
+      });
+    }
+
+    function selectIdx(idx) {
+      activeIdx = idx;
+      const m = CATALOG[idx];
+      // 3D model shows first
       viewer.src = m.glb;
-      viewer.setAttribute('poster', '');
+      viewer.setAttribute('poster', ''); // ensures the interactive viewer, not just poster
       titleEl.textContent = m.name;
       catEl.textContent = m.category || '';
       aboutEl.textContent = m.about || '';
-      srcLink.href = m.glb;
-    }
+      thumbEl.src = m.thumb || '';
+      thumbEl.alt = m.name || '';
 
-    function cardEl(m, idx) {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.addEventListener('click', () => selectModel(m));
-
-      const img = document.createElement('img');
-      img.className = 'thumb';
-      img.src = m.thumb;
-      img.alt = m.name;
-      img.loading = 'lazy';
-
-      const meta = document.createElement('div');
-      meta.className = 'meta';
-      const name = document.createElement('div');
-      name.className = 'name';
-      name.textContent = m.name;
-      const pill = document.createElement('div');
-      pill.className = 'pill';
-      pill.textContent = m.category || 'part';
-
-      meta.appendChild(name);
-      meta.appendChild(pill);
-      card.appendChild(img);
-      card.appendChild(meta);
-
-      if (idx === 0) selectModel(m);
-      return card;
+      // update carousel active state
+      [...carousel.children].forEach((el, i) => {
+        if (i === activeIdx) el.classList.add('active'); else el.classList.remove('active');
+      });
     }
 
     async function boot() {
       try {
-        const res = await fetch('parts.json', {cache: 'no-store'});
+        const res = await fetch('parts.json', { cache: 'no-store' });
         CATALOG = await res.json();
       } catch (e) {
         console.error('Failed to load parts.json', e);
         return;
       }
-      grid.innerHTML = '';
-      CATALOG.forEach((m, idx) => grid.appendChild(cardEl(m, idx)));
+      if (!Array.isArray(CATALOG) || CATALOG.length === 0) return;
+      renderCarousel();
+      selectIdx(0);
     }
     boot();
   </script>
