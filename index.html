@@ -1,44 +1,74 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Machine Parts Browser</title>
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
-  <style>
-    :root { --ink:#e6e6e6; --bg:#0a0c0f; --panel:#0f1217; --line:#1a1f27; --accent:#9dc1ff; --gap:12px; }
-    *{ box-sizing:border-box }
-    body{ margin:0; font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink); background:var(--bg) }
-    header{ padding:14px 16px; border-bottom:1px solid var(--line) }
-    header h1{ margin:0; font-size:16px }
-    main{ display:grid; grid-template-rows:auto auto 1fr; gap:var(--gap); padding:12px }
-    /* Main box */
-    #mainBox{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; }
-    #viewer{ width:100%; height:min(60vh,560px); background:#0d0f14; border:1px solid var(--line); border-radius:10px; }
-    .details{ display:grid; grid-template-columns: 64px 1fr; gap:12px; align-items:center; padding-top:10px }
-    .thumb{ width:64px; height:64px; object-fit:cover; border-radius:6px; background:#10141b; border:1px solid var(--line) }
-    .titleRow{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
-    .name{ font-weight:700 }
-    .tag{ font-size:11px; padding:2px 8px; border:1px solid var(--line); border-radius:999px; opacity:.9 }
-    .about{ opacity:.8; font-size:13px; margin-top:4px }
-    /* Carousel */
-    #carouselWrap{ overflow-x:auto; overscroll-behavior-x:contain; padding-bottom:6px }
-    #carousel{ display:flex; gap:10px; min-height:140px }
-    .card{ width:150px; flex:0 0 auto; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; cursor:pointer; }
-    .card:active{ transform:translateY(1px) }
-    .card img{ width:100%; height:100px; object-fit:cover; display:block; background:#10141b }
-    .card .meta{ padding:6px 8px; display:flex; justify-content:space-between; gap:6px; align-items:center }
-    .card .name{ font-size:12px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
-    .card .tag{ font-size:10px }
-    .active{ outline:2px solid var(--accent) }
-    .hint{ opacity:.7; font-size:12px; padding:0 2px }
-    button{ padding:8px 12px; background:#151a22; border:1px solid var(--line); color:var(--ink); border-radius:8px; cursor:pointer }
-    button[disabled]{ opacity:.5; cursor:not-allowed }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Machine Parts Browser</title>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+<style>
+  :root { --ink:#e6e6e6; --bg:#0a0c0f; --panel:#0f1217; --line:#1a1f27; --accent:#9dc1ff; --gap:12px; }
+  *{ box-sizing:border-box }
+  body{ margin:0; font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto; color:var(--ink); background:var(--bg) }
+
+  header{ padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  header h1{ margin:0; font-size:16px }
+  .actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+  button{ padding:10px 12px; background:#151a22; border:1px solid var(--line); color:var(--ink); border-radius:10px; cursor:pointer; }
+  button[disabled]{ opacity:.5; cursor:not-allowed }
+
+  main{ display:grid; gap:var(--gap); padding:12px; max-width:1100px; margin:0 auto; }
+
+  /* MAIN BOX */
+  #mainBox{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  #viewer{ width:100%; height:55vh; max-height:560px; min-height:300px; background:#0d0f14; border:1px solid var(--line); border-radius:10px; }
+  .details{ display:grid; grid-template-columns:64px 1fr; gap:12px; align-items:center; padding-top:10px }
+  .thumb{ width:64px; height:64px; object-fit:cover; border-radius:6px; background:#10141b; border:1px solid var(--line) }
+  .titleRow{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+  .name{ font-weight:700; font-size:16px }
+  .tag{ font-size:11px; padding:2px 8px; border:1px solid var(--line); border-radius:999px; opacity:.9 }
+  .about{ opacity:.8; font-size:13px; margin-top:4px }
+  .hint{ opacity:.7; font-size:12px }
+
+  /* CAROUSELS */
+  .carouselWrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; padding-bottom:6px; }
+  .carousel{ display:flex; gap:10px; min-height:160px }
+  .card{ width:160px; flex:0 0 auto; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; cursor:pointer; }
+  .card:active{ transform:translateY(1px) }
+  .card img{ width:100%; height:110px; object-fit:cover; display:block; background:#10141b }
+  .card .meta{ padding:6px 8px; display:flex; justify-content:space-between; gap:6px; align-items:center }
+  .card .name{ font-size:12px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+  .card .tag{ font-size:10px }
+  .active{ outline:2px solid var(--accent) }
+
+  /* ADD FORM (drawer) */
+  #drawer{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; display:none; }
+  #drawer.open{ display:block; }
+  .form{ display:grid; gap:10px; }
+  .row{ display:grid; gap:6px; }
+  label{ font-size:12px; opacity:.9 }
+  input, textarea{ width:100%; padding:10px; background:#0b0f15; color:var(--ink); border:1px solid var(--line); border-radius:8px; font:inherit; }
+  textarea{ min-height:80px; resize:vertical; }
+
+  /* MOBILE FIRST */
+  @media (max-width: 640px) {
+    header h1{ font-size:15px }
+    #viewer{ height:48vh; min-height:260px }
+    .card{ width:140px }
+    .details{ grid-template-columns:56px 1fr }
+    .thumb{ width:56px; height:56px }
+  }
+</style>
 </head>
 <body>
-  <header><h1>Machine Parts</h1></header>
+  <header>
+    <h1>Machine Parts</h1>
+    <div class="actions">
+      <button id="addBtn">Add machine part</button>
+      <button id="exportBtn" title="Download your added parts as JSON">Export “your parts”</button>
+      <button id="clearBtn" title="Clear your added parts">Clear “your parts”</button>
+    </div>
+  </header>
 
   <main>
     <!-- MAIN BOX -->
@@ -67,99 +97,218 @@
           <div id="about" class="about"></div>
         </div>
       </div>
-      <div class="hint">Tip: explore the 3D view, then tap “View in your space” on supported Android Chrome.</div>
+      <div class="hint">Explore the 3D view, then tap “View in your space” on supported Android Chrome.</div>
     </section>
 
-    <!-- CAROUSEL -->
+    <!-- CATALOG CAROUSEL -->
     <section>
-      <div class="hint">Browse parts</div>
-      <div id="carouselWrap">
-        <div id="carousel"></div>
+      <div class="hint">Catalog</div>
+      <div class="carouselWrap"><div id="catalogCarousel" class="carousel"></div></div>
+    </section>
+
+    <!-- USER CAROUSEL -->
+    <section id="userSection" style="display:none;">
+      <div class="hint">Your parts</div>
+      <div class="carouselWrap"><div id="userCarousel" class="carousel"></div></div>
+    </section>
+
+    <!-- ADD FORM DRAWER -->
+    <section id="drawer">
+      <div class="form">
+        <div class="row">
+          <label for="fName">Name</label>
+          <input id="fName" placeholder="e.g., Hex Bolt" />
+        </div>
+        <div class="row">
+          <label for="fCategory">Category</label>
+          <input id="fCategory" placeholder="e.g., fastener" />
+        </div>
+        <div class="row">
+          <label for="fAbout">About</label>
+          <textarea id="fAbout" placeholder="Short description"></textarea>
+        </div>
+        <div class="row">
+          <label for="fThumb">Thumbnail URL (https)</label>
+          <input id="fThumb" placeholder="https://..." />
+        </div>
+        <div class="row">
+          <label for="fGLB">GLB URL (https)</label>
+          <input id="fGLB" placeholder="https://...model.glb" />
+        </div>
+        <div class="actions">
+          <button id="saveBtn">Save to “your parts”</button>
+          <button id="cancelBtn">Cancel</button>
+        </div>
+        <div class="hint">Note: This saves to your browser only (localStorage). For production, back this with an API.</div>
       </div>
     </section>
   </main>
 
-  <script>
-    const viewer   = document.getElementById('viewer');
-    const arBtn    = document.getElementById('arBtn');
-    const titleEl  = document.getElementById('title');
-    const catEl    = document.getElementById('category');
-    const aboutEl  = document.getElementById('about');
-    const thumbEl  = document.getElementById('thumb');
-    const carousel = document.getElementById('carousel');
+<script>
+  const viewer   = document.getElementById('viewer');
+  const arBtn    = document.getElementById('arBtn');
+  const titleEl  = document.getElementById('title');
+  const catEl    = document.getElementById('category');
+  const aboutEl  = document.getElementById('about');
+  const thumbEl  = document.getElementById('thumb');
+  const catalogCarousel = document.getElementById('catalogCarousel');
+  const userCarousel    = document.getElementById('userCarousel');
+  const userSection     = document.getElementById('userSection');
 
-    // Gate AR button to Android Chrome with ARCore/Play Services for AR
-    const sceneViewerSupported = /Android/i.test(navigator.userAgent) && /Chrome/i.test(navigator.userAgent);
-    if (!sceneViewerSupported) {
-      arBtn.setAttribute('disabled','true');
-      arBtn.textContent = 'AR requires Android Chrome';
-    }
+  const drawer   = document.getElementById('drawer');
+  const addBtn   = document.getElementById('addBtn');
+  const saveBtn  = document.getElementById('saveBtn');
+  const cancelBtn= document.getElementById('cancelBtn');
+  const exportBtn= document.getElementById('exportBtn');
+  const clearBtn = document.getElementById('clearBtn');
 
-    let CATALOG = [];
-    let activeIdx = 0;
+  const fName    = document.getElementById('fName');
+  const fCategory= document.getElementById('fCategory');
+  const fAbout   = document.getElementById('fAbout');
+  const fThumb   = document.getElementById('fThumb');
+  const fGLB     = document.getElementById('fGLB');
 
-    function renderCarousel() {
-      carousel.innerHTML = '';
-      CATALOG.forEach((m, idx) => {
-        const card = document.createElement('div');
-        card.className = 'card' + (idx === activeIdx ? ' active' : '');
-        card.addEventListener('click', () => selectIdx(idx));
+  const sceneViewerSupported = /Android/i.test(navigator.userAgent) && /Chrome/i.test(navigator.userAgent);
+  if (!sceneViewerSupported) { arBtn.setAttribute('disabled','true'); arBtn.textContent='AR requires Android Chrome'; }
 
-        const img = document.createElement('img');
-        img.src = m.thumb;
-        img.alt = m.name;
-        img.loading = 'lazy';
+  const LS_KEY = 'machine_parts_user_catalog_v1';
 
-        const meta = document.createElement('div');
-        meta.className = 'meta';
+  let CATALOG = [];     // from parts.json
+  let USERPARTS = [];   // from localStorage
+  let activeIdx = { type: 'catalog', index: 0 };
 
-        const nm = document.createElement('div');
-        nm.className = 'name';
-        nm.textContent = m.name;
+  function loadLocal() {
+    try {
+      USERPARTS = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+    } catch { USERPARTS = []; }
+    userSection.style.display = USERPARTS.length ? 'block' : 'none';
+  }
 
-        const tg = document.createElement('span');
-        tg.className = 'tag';
-        tg.textContent = m.category || 'part';
+  function saveLocal() {
+    localStorage.setItem(LS_KEY, JSON.stringify(USERPARTS));
+    userSection.style.display = USERPARTS.length ? 'block' : 'none';
+  }
 
-        meta.appendChild(nm);
-        meta.appendChild(tg);
-        card.appendChild(img);
-        card.appendChild(meta);
-        carousel.appendChild(card);
-      });
-    }
+  function card(part, onClick, isActive=false) {
+    const c = document.createElement('div');
+    c.className = 'card' + (isActive ? ' active' : '');
+    c.addEventListener('click', onClick);
 
-    function selectIdx(idx) {
-      activeIdx = idx;
-      const m = CATALOG[idx];
-      // 3D model shows first
-      viewer.src = m.glb;
-      viewer.setAttribute('poster', ''); // ensures the interactive viewer, not just poster
-      titleEl.textContent = m.name;
-      catEl.textContent = m.category || '';
-      aboutEl.textContent = m.about || '';
-      thumbEl.src = m.thumb || '';
-      thumbEl.alt = m.name || '';
+    const img = document.createElement('img');
+    img.src = part.thumb || '';
+    img.alt = part.name || '';
+    img.loading = 'lazy';
 
-      // update carousel active state
-      [...carousel.children].forEach((el, i) => {
-        if (i === activeIdx) el.classList.add('active'); else el.classList.remove('active');
-      });
-    }
+    const meta = document.createElement('div'); meta.className='meta';
+    const nm = document.createElement('div'); nm.className='name'; nm.textContent = part.name || '';
+    const tg = document.createElement('span'); tg.className='tag'; tg.textContent = part.category || 'part';
 
-    async function boot() {
-      try {
-        const res = await fetch('parts.json', { cache: 'no-store' });
-        CATALOG = await res.json();
-      } catch (e) {
-        console.error('Failed to load parts.json', e);
-        return;
-      }
-      if (!Array.isArray(CATALOG) || CATALOG.length === 0) return;
-      renderCarousel();
-      selectIdx(0);
-    }
-    boot();
-  </script>
+    meta.appendChild(nm); meta.appendChild(tg);
+    c.appendChild(img); c.appendChild(meta);
+    return c;
+  }
+
+  function renderCarousels() {
+    // Catalog
+    catalogCarousel.innerHTML = '';
+    CATALOG.forEach((p,i) => {
+      catalogCarousel.appendChild(card(p, () => select({type:'catalog', index:i}), activeIdx.type==='catalog' && activeIdx.index===i));
+    });
+    // User
+    userCarousel.innerHTML = '';
+    USERPARTS.forEach((p,i) => {
+      userCarousel.appendChild(card(p, () => select({type:'user', index:i}), activeIdx.type==='user' && activeIdx.index===i));
+    });
+  }
+
+  function select(target) {
+    activeIdx = target;
+    const p = target.type === 'catalog' ? CATALOG[target.index] : USERPARTS[target.index];
+    if (!p) return;
+
+    viewer.src = p.glb;
+    viewer.setAttribute('poster','');
+    titleEl.textContent = p.name || '';
+    catEl.textContent   = p.category || '';
+    aboutEl.textContent = p.about || '';
+    thumbEl.src = p.thumb || '';
+    thumbEl.alt = p.name || '';
+
+    // update active outlines
+    [...catalogCarousel.children].forEach((el,i)=> {
+      if (activeIdx.type==='catalog' && i===activeIdx.index) el.classList.add('active'); else el.classList.remove('active');
+    });
+    [...userCarousel.children].forEach((el,i)=> {
+      if (activeIdx.type==='user' && i===activeIdx.index) el.classList.add('active'); else el.classList.remove('active');
+    });
+  }
+
+  async function boot() {
+    // load server catalog
+    try {
+      const res = await fetch('parts.json', {cache:'no-store'});
+      CATALOG = await res.json();
+      if (!Array.isArray(CATALOG)) CATALOG = [];
+    } catch { CATALOG = []; }
+    // load user parts
+    loadLocal();
+    renderCarousels();
+    // default selection
+    if (CATALOG.length) select({type:'catalog', index:0});
+    else if (USERPARTS.length) select({type:'user', index:0});
+  }
+
+  // Drawer controls
+  addBtn.addEventListener('click', () => {
+    drawer.classList.toggle('open');
+    if (drawer.classList.contains('open')) fName.focus();
+  });
+  cancelBtn.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    fName.value=fCategory.value=fAbout.value=fThumb.value=fGLB.value='';
+  });
+
+  function isHttpUrl(s){ try{ const u=new URL(s); return u.protocol==='https:' || u.protocol==='http:'; }catch{return false;} }
+
+  saveBtn.addEventListener('click', () => {
+    const part = {
+      name: (fName.value||'').trim(),
+      category: (fCategory.value||'').trim(),
+      about: (fAbout.value||'').trim(),
+      thumb: (fThumb.value||'').trim(),
+      glb: (fGLB.value||'').trim()
+    };
+    // minimal validation
+    if (!part.name || !part.glb || !isHttpUrl(part.glb)) { alert('Name and a valid GLB URL are required.'); return; }
+    if (part.thumb && !isHttpUrl(part.thumb)) { alert('Thumbnail must be a valid URL.'); return; }
+
+    USERPARTS.unshift(part);
+    saveLocal();
+    renderCarousels();
+    select({type:'user', index:0});
+
+    drawer.classList.remove('open');
+    fName.value=fCategory.value=fAbout.value=fThumb.value=fGLB.value='';
+  });
+
+  exportBtn.addEventListener('click', () => {
+    const data = JSON.stringify(USERPARTS, null, 2);
+    const blob = new Blob([data], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'your_parts.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  clearBtn.addEventListener('click', () => {
+    if (!confirm('Clear all “your parts” from this browser?')) return;
+    USERPARTS = []; saveLocal(); renderCarousels();
+    if (CATALOG.length) select({type:'catalog', index:0});
+    else titleEl.textContent = catEl.textContent = aboutEl.textContent = '', thumbEl.src='';
+  });
+
+  boot();
+</script>
 </body>
 </html>
